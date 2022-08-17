@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<div class = "container">
+{% for x in list %}
+<h2>{{x.title}}</h2>
+<br>
+<ul>
+<li><a href="{% url 'answer' pk=x.id %}">Shareable link(Copy link location)</a></li>
+<li>Share this code: {{x.id}}</li>
+<li><a href="{% url 'displayform' pk=x.id %}">View detail form</a></li>
+<li><a href="{% url 'question' pk=x.id %}">Visualise</a></li>
+</ul>
+<hr>
+{% endfor %}
+</div>
+</body>
+</html>
