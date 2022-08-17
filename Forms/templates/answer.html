@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class = "container">
+	<br>
+	<div class="container" style="text-align: center">
+	<h1>{{form.title}}</h1>
+	</div>
+	<br>
+	<form action="" method="post" enctype="multiform/form-data">
+	{% csrf_token %}
+	{% for x in mylist %}
+	{% with q=x.0 %}
+	{% with l=q.id|stringformat:"i" %}
+	{% if q.question_type == 1 %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	{% if q.question_valid == 1 %}
+	<p><input type="text" maxlength="250" placeholder="Answer" style = "width: 70%" name="{{'1@'|add:l}}"></p>
+	{% endif %}
+	{% if q.question_valid == 2 %}
+	<p><input type="number" maxlength="250" placeholder="Answer" style = "width: 70%" name="{{'1@'|add:l}}"></p>
+	{% endif %}
+	{% if q.question_valid == 3 %}
+	<p><input type="email" maxlength="250" placeholder="Answer" style = "width: 70%" name="{{'1@'|add:l}}"></p>
+	{% endif %}
+	{% endif %}
+	{% if q.question_type == 2 %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	<p><textarea placeholder="Answer" rows="10" cols="60" style = 'width: 70%' name="{{'2@'|add:l}}"></textarea></p>
+	{% endif %}
+	{% if q.question_type == 3 %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	{% for y in x.1 %}
+	<input type="radio" name="{{'3@'|add:l}}" value="{{y.id}}">{{y.option}}<br>
+	{% endfor %}
+	{% endif %}
+	{% if q.question_type == 4 %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	{% for y in x.1 %}
+	{% with p=y.id|stringformat:"i" %}
+	<input type="checkbox" name="{{'4@'|add:l|add:'#'|add:p}}">{{y.option}}<br>
+	{% endwith %}
+	{% endfor %}
+	{% endif %}
+	{% if q.question_type == 5 %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	<select name="{{'5@'|add:l}}">
+	{% for y in x.1 %}
+	<option value="{{y.id}}">{{y.option}}</option>
+	{% endfor %}
+	</select>
+	{% endif %}
+	{% if q.question_type == 6 %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	{% if q.question_valid == 1 %}
+	<input type="file" name="{{'6@'|add:l}}" accept=".pdf">
+	{% endif %}
+	{% if q.question_valid == 2 %}
+	<input type="file" name="{{'6@'|add:l}}">
+	{% endif %}
+	{% endif %}
+	{% if q.question_type == 7 %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	<input type="radio" name="{{'7@'|add:l}}">Yes<br>
+	<input type="radio" name="{{'7@'|add:l}}">No<br>
+	{% endif %}
+	{% if q.question_type == 8 %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	<input type="range" min="0" max="10" value="5" name="{{'8@'|add:l}}">
+	{% endif %}
+	{% endwith %}
+	<hr>
+	{% endwith %}
+	{% endfor %}
+	<button type="submit" style="margin-left: 45%; margin-right: 45%" value="Submit">Submit</button>
+</form>
+</div>
+</body>
+</html>
