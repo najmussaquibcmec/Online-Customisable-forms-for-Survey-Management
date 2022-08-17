@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Untitled Form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+	<h2>New Form</h2>
+	<div class="container">
+    <form action="" method="post">
+     {% csrf_token %}
+      <div class="container" id = "questions">
+      <br>
+        <input type="text" placeholder="Title of form" style = 'width: 90%' name ="title" required>
+        <br>
+        <br>
+        <div class="dropdown" style="text-align: right">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add question
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a value="line" onclick="line()">Single Line</a></li>
+        <li><a value="para" onclick="para()">Paragraph</a></li>
+        <li><a value="single" onclick="single()">Radio-button</a></li>
+        <li><a value="multi" onclick="multi()">Check-boxes</a></li>
+        <li><a value="drop" onclick="drop()">Drop-down</a></li>
+        <li><a value="file" onclick="file()">File-Upload</a></li>
+        <li><a value="toggle" onclick="toggle()">toggle</a></li>
+        <li><a value="slider" onclick="slider()">Slider</a></li>
+      </ul>
+    </div>
+      </div>
+      <div class="container-fluid" style="margin-right: 20px">
+        <br>
+        <button type="button" id = "optionbutton" style = "display:none" class="btn btn-secondary" onclick="add()">Add Option</button>
+      </div>
+      <div class="container-fluid" style="margin-right: 20px">
+        <br>
+        <button type="button" id = "linevalid" style = "display:none" class="btn btn-secondary" data-toggle="dropdown">Question Type<span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a value="text" onclick="alpha()">Alphanumeric</a></li>
+        <li><a value="number" onclick="number()">Numeric</a></li>
+        <li><a value="email" onclick="ema()">Email</a></li>
+      </div>
+      <div class="container-fluid" style="margin-right: 20px">
+        <br>
+        <button type="button" id = "filevalid" style = "display:none" class="btn btn-secondary" data-toggle="dropdown">File Type<span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a value="pdf" onclick="pdf()">.pdf files only</a></li>
+        <li><a value="all" onclick="al()">Any file</a></li>
+      </div>
+      <br><br>
+      <input type="submit" value="Create Form">
+  <br>
+  <br>
+  <br>
+  </form>
+  <script type="text/javascript">
+    var q=0;
+var o=0;
+var p=0;
+function line(){
+  document.getElementById("linevalid").style.display="block";
+  q++;
+  document.getElementById("optionbutton").style.display="none";
+}
+function para(){
+  q++;
+  var q_n = q.toString() + "$2";
+  var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n + " >";
+  var c = document.createElement("p");
+  c.innerHTML = k;
+  document.getElementById("questions").appendChild(c);
+  document.getElementById("optionbutton").style.display="none";
+}
+function single(){
+  q++;
+  p=3;
+  var q_n = q.toString() + "$3";
+  var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n+" >";
+  var c = document.createElement("p");
+  c.innerHTML = k;
+  document.getElementById("questions").appendChild(c);
+  document.getElementById("optionbutton").style.display="block";
+  o=0;
+}
+function multi(){
+  q++;
+  p=4;
+  var q_n= q.toString() + "$4";
+  var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n + " >";
+  var c = document.createElement("p");
+  c.innerHTML = k;
+  document.getElementById("questions").appendChild(c);
+  document.getElementById("optionbutton").style.display="block";
+  o=0;
+}
+function drop(){
+  q++;
+  p=5;
+  var q_n = q.toString() + "$5";
+  var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n + " >";
+  var c = document.createElement("p");
+  c.innerHTML = k;
+  document.getElementById("questions").appendChild(c);
+  document.getElementById("optionbutton").style.display="block";
+  o=0;
+}
+function file(){
+  document.getElementById("filevalid").style.display="block";
+  q++;
+    document.getElementById("optionbutton").style.display="none";
+}
+function toggle(){
+  q++;
+  var q_n = q.toString() + "$7";
+  var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n+" >";
+  var c = document.createElement("p");
+  c.innerHTML = k;
+  document.getElementById("questions").appendChild(c);
+  document.getElementById("optionbutton").style.display="none";
+  document.getElementById("linevalid").style.display="none";
+}
+function slider(){
+  q++;
+  var q_n = q.toString() + "$8";
+  var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%'type = text name =" + q_n + " >";
+  var c = document.createElement("p");
+  c.innerHTML = k;
+  document.getElementById("questions").appendChild(c);
+  document.getElementById("optionbutton").style.display="none";
+  document.getElementById("linevalid").style.display="none";
+}
+function add(){
+    o++;
+    var o_n = q.toString() + "$" + p.toString()+"$"+o.toString();
+    var k = "<br><p>Option Number: " +o.toString() +" </p><input style = 'width:45%'type = text name =" + o_n + " >";
+    var c = document.createElement("p");
+    c.innerHTML = k;
+    document.getElementById("questions").appendChild(c);
+  }
+function alpha(){
+ 	var q_n = "1@"+q.toString() + "$1";
+  	var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n +" >";
+  	var c = document.createElement("p");
+  	c.innerHTML = k;
+  	document.getElementById("questions").appendChild(c);
+  	  document.getElementById("linevalid").style.display="none";
+}
+function ema(){
+ 	var q_n = "3@"+q.toString() + "$1";
+  	var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n +" >";
+  	var c = document.createElement("p");
+  	c.innerHTML = k;
+  	document.getElementById("questions").appendChild(c);
+  document.getElementById("linevalid").style.display="none";
+
+}
+function number(){
+ 	var q_n = "2@"+q.toString() + "$1";
+  	var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n +" >";
+  	var c = document.createElement("p");
+  	c.innerHTML = k;
+  	document.getElementById("questions").appendChild(c);
+  	  document.getElementById("linevalid").style.display="none";
+
+}
+function pdf(){
+ 	var q_n = "1@"+q.toString() + "$6";
+  	var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n +" >";
+  	var c = document.createElement("p");
+  	c.innerHTML = k;
+  	document.getElementById("questions").appendChild(c);
+  	  document.getElementById("filevalid").style.display="none";
+
+}
+function al(){
+ 	var q_n = "2@"+q.toString() + "$6";
+  	var k = "<br><p>Question Number: " +q.toString() +" </p><input style = 'width: 70%;' type = text name =" + q_n +" >";
+  	var c = document.createElement("p");
+  	c.innerHTML = k;
+  	document.getElementById("questions").appendChild(c);
+  	  document.getElementById("filevalid").style.display="none";
+
+}
+  </script>
+</body>
+</html>
